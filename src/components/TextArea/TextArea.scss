@@ -1,0 +1,20 @@
+.TextAreaWrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  padding: 8px;
+
+  .textarea-text {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-bottom: 1px solid var(--primary-color);
+    font-size: var(--size-small);
+    text-align: left;
+    padding: 8px;
+    width: calc(100% - 16px);
+  }
+}
