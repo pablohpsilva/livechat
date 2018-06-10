@@ -1,16 +1,47 @@
 import React from 'react'
-import { View } from 'react-native'
+import PropTypes from 'prop-types'
+import { appendClass } from '../../utils/util'
+import './Input.scss'
 
-class Input extends React.PureComponent {
+class Input extends React.Component {
   render () {
-    const compClass = ['Input', this.props.className || ''].join(' ').trim()
+    const {
+      className,
+      label
+    } = this.props
+    const wrapperComputedClass = appendClass('InputWrapper', className)
+    const inputComputedClass = appendClass('input-text', className)
+
     return (
-      <View
-        className={compClass}>
-        { this.props.children }
-      </View>
+      <div
+        className={wrapperComputedClass}>
+        {
+          !!label &&
+            <span
+              className="float-text">
+              { label }
+            </span>
+        }
+        <input
+          {...this.props}
+          className={inputComputedClass}/>
+      </div>
     )
   }
+}
+
+Input.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  placeholder: PropTypes.string,
+  label: PropTypes.string,
+  style: PropTypes.object,
+  className: PropTypes.string,
+  type: PropTypes.string,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
 }
 
 export default Input

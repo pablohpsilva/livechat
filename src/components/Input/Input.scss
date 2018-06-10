@@ -1,0 +1,22 @@
+.InputWrapper {
+  align-items: flex-start;
+  border: 1px solid var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 8px;
+  position: relative;
+
+  .float-text {
+    color: var(--primary-color-lighter);
+    font-size: var(--size-tiny);
+  }
+
+  .input-text {
+    border: none;
+    color: var(--primary-color);
+    font-size: var(--size-regular);
+    margin-top: 4px;
+    width: 100%;
+  }
+}

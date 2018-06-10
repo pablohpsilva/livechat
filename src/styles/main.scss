@@ -1,23 +1,27 @@
 @import 'mixins';
 
 html {
-  --background: #ffffff;
-  --primary-color: #4b4b4b;
-  --primary-color-lighter: opacify(#4b4b4b, 60%);
-  --secondary-color: #ffffff;
-  --secondary-color-lighter: opacify(#ffffff, 60%);
-  --active-color: #2287F8;
-  --disabled-color: #F0F0F0;
-  
+  --background: rgba(255, 255, 255, 1);
+  --primary-color: rgba(75, 75, 75, 1);
+  --primary-color-lighter: rgba(75, 75, 75, .6);
+  --secondary-color: rgba(255, 255, 255, 1);
+  --secondary-color-lighter: rgba(255, 255, 255, .6);
+  --active-color: rgba(34, 135, 248, 1);
+  --disabled-color: rgba(240, 240, 240, 1);
+
+  --size-tiny: 11px;
+  --size-small: 13px;
+  --size-regular: 14px;
+
   &[data-theme="dark"] {
-    --background: #333333;
-    --primary-color: #d8d8d8;
-    --primary-color-lighter: opacify(#d8d8d8, 60%);
-    --secondary-color: #ffffff;
-    --secondary-color-lighter: opacify(#ffffff, 60%);
-    --active-color: #2287F8;
-    --disabled-color: #535252;
-    --disabled-color-darker: darken(#535252, 60%);
+    --background: rgba(51, 51, 51, 1);
+    --primary-color: rgba(216, 216, 216, 1);
+    --primary-color-lighter: rgba(216, 216, 216, .6);
+    --secondary-color: rgba(255, 255, 255, 1);
+    --secondary-color-lighter: rgba(255, 255, 255, .6);
+    --active-color: rgba(34, 135, 248, 1);
+    --disabled-color: rgba(83, 82, 82, 1);
+    --disabled-color-darker: rgba(83, 82, 82, .6);
   }
 }
 

@@ -34,6 +34,7 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
+    "prop-types": "^15.6.1",
     "raf": "3.4.0",
     "ramda": "^0.25.0",
     "react": "^16.4.0",
@@ -52,7 +53,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "new-component": "BABEL_ENV=development babel-node config/new-component.js",
+    "ncomp": "BABEL_ENV=development babel-node config/new-component.js",
     "githooks": "sh git-hooks/install.sh",
     "dev": "node scripts/start.js",
     "start": "node scripts/start.js",
