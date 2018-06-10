@@ -10,16 +10,15 @@ import { join } from 'path'
 
 function getVueComponent (name) {
   return `import React from 'react'
-import { View } from 'react-native'
 
 class ${name} extends React.PureComponent {
   render () {
     const compClass = ['${name}', this.props.className || ''].join(' ').trim()
     return (
-      <View
+      <div
         className={compClass}>
         { this.props.children }
-      </View>
+      </div>
     )
   }
 }
