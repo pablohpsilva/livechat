@@ -1,3 +1,5 @@
+@import 'mixins';
+
 html {
   --background: #ffffff;
   --primary-color: #4b4b4b;
@@ -22,5 +24,6 @@ html {
 body {
   font-family: 'Helvetica Neue', sans-serif;
   background-color: var(--background);
-  transition: background-color 1000ms linear;
+  @include transition(background-color);
+  @include transition(background-color);
 }
