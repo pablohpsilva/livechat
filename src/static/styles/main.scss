@@ -1,3 +1,4 @@
+@import 'fonts';
 @import 'mixins';
 
 html {
@@ -7,7 +8,7 @@ html {
   --secondary-color: rgba(255, 255, 255, 1);
   --secondary-color-lighter: rgba(255, 255, 255, .6);
   --active-color: rgba(34, 135, 248, 1);
-  --disabled-color: rgba(240, 240, 240, 1);
+  --disabled-color: rgba(190, 190, 190, .6);
 
   --size-tiny: 11px;
   --size-small: 13px;
