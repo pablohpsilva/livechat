@@ -1,0 +1,8 @@
+.chatList-wrapper {
+  overflow: hidden !important;
+  height: calc(100vh - 116px) !important;
+
+  :first-child {
+    overflow-y: scroll !important;
+  }
+}
