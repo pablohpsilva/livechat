@@ -10,7 +10,7 @@ class TextArea extends React.Component {
 
     this.onEnter = this.props.onEnter
     this.state = {
-      text: 'vaca'
+      text: ''
     }
 
     this.onChangeText = this.onChangeText.bind(this)
