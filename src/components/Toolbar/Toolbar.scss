@@ -1,0 +1,31 @@
+.toolbar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  .toolbar-item {
+    text-decoration: none;
+    color: var(--disabled-color);
+    font-size: calc(0.3em + var(--size-regular));
+    position: relative;
+
+    &.active {
+      color: var(--active-color);
+    }
+  }
+
+  .indicator {
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    top: -5px;
+    right: -5px;
+    text-align: center;
+    padding: 1px;
+    background-color: red;
+    border-radius: 500px;
+    font-size: calc(var(--size-tiny) - 4px);
+    line-height: 10px;
+    color: var(--secondary-color);
+  }
+}
