@@ -1,4 +1,4 @@
-// import { propOr, identity } from 'ramda'
+import { localStorageOr } from '../../utils/util'
 import {
   SETTING_UPDATE_INTERFACE_VALUE,
   SETTING_UPDATE_CLOCK_VALUE,
@@ -6,16 +6,18 @@ import {
   SETTING_RESET
 } from '../actions/actionTypes';
 
-const initialState = {
+const initialState = localStorageOr({
   interfaceColor: 'light',
-  clockDisplay: '12',
+  clockDisplay: 'MMM DD hh:mm A',
   ctrlEnter: 'on',
   defaultConfig: {
     interfaceColor: 'light',
-    clockDisplay: '12',
+    clockDisplay: 'MMM DD hh:mm A',
     ctrlEnter: 'on'
   }
-};
+}, 'settingsState');
+
+console.log(initialState)
 
 export const settingsReducer = (state = initialState, action) => {
   switch (action.type) {

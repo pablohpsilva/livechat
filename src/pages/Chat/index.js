@@ -1,56 +1,74 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import {
+  saveMessage
+} from '../../store/actions';
 import { appendClass } from '../../utils/util'
 
 import ChatList from '../../components/ChatList'
 import TextArea from '../../components/TextArea'
 
-const author = 'pablohpsilva'
-const data = [
-  { author: 'abc', message: 'lorem ipsum dolor amet', timestamp: new Date().toDateString() },
-  { author: 'pablohpsilva', message: 'come again?', timestamp: new Date().toDateString() },
-  { author: 'abc', message: 'lorem ipsum dolor amet', timestamp: new Date().toDateString() },
-  { author: 'abc', message: 'lorem ipsum dolor amet', timestamp: new Date().toDateString() },
-  { author: 'abc', message: 'lorem ipsum dolor amet', timestamp: new Date().toDateString() },
-  { author: 'abc', message: 'lorem ipsum dolor amet', timestamp: new Date().toDateString() },
-  { author: 'pablohpsilva', message: 'i dont speak latim', timestamp: new Date().toDateString() }
-]
-
 class Chat extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      data: [...data]
-    }
-
-    this.addData = this.addData.bind(this)
+    this.saveOutgoingMessage = this.saveOutgoingMessage.bind(this)
   }
 
-  addData(message) {
-    const newData = {
-      author: 'pablohpsilva',
-      message,
-      timestamp: new Date().toDateString()
+  saveOutgoingMessage (value) {
+    const message = {
+      author: this.props.author,
+      message: value,
+      timestamp: new Date()
     }
-    this.setState((state) => Object.assign(state, { data: [...state.data].concat(newData) }))
+    this.props.saveMessage(message)
+  }
+
+  setTheme () {
+    const darkTheme = (this.props.interfaceColor === 'dark')
+    document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light')
+  }
+
+  componentDidMount () {
+    this.setTheme()
   }
 
   render () {
+    const {
+      author,
+      clockDisplay,
+      messages
+    } = this.props
     const wrapperComputedClass = appendClass('chat-wrapper', this.props.className)
 
     return (
       <div
         className={wrapperComputedClass}>
         <ChatList
-          data={this.state.data}
-          author={author}/>
+          data={messages}
+          author={author}
+          clockDisplay={clockDisplay}/>
 
         <TextArea
-          onEnter={(text) => this.addData(text)}
+          onEnter={this.saveOutgoingMessage}
           placeholder="Type something here"/>
       </div>
     )
   }
 }
 
-export default Chat
+const mapStateToProps = store => ({
+  interfaceColor: store.settingsState.interfaceColor,
+  clockDisplay: store.settingsState.clockDisplay,
+  author: store.userState.username,
+  messages: store.messagesState.messages
+})
+
+const mapDispatchToProps = dispatch => ({
+  saveMessage: (value) => dispatch(saveMessage(value))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Chat)

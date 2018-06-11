@@ -3,8 +3,8 @@ import {
   SETTING_UPDATE_CLOCK_VALUE,
   SETTING_UPDATE_CTRL_ENTER_VALUE,
   SETTING_RESET,
-  MESSAGE_SAVE_INCOMING,
-  MESSAGE_SAVE_OUTGOING,
+  MESSAGE_SAVE,
+  MESSAGE_UPDATE_USERNAME,
   USER_SAVE_USERNAME
 } from './actionTypes';
 
@@ -27,13 +27,13 @@ export const resetConfig = () => ({
   type: SETTING_RESET
 });
 
-export const saveIncomingMessage = value => ({
-  type: MESSAGE_SAVE_INCOMING,
+export const saveMessage = value => ({
+  type: MESSAGE_SAVE,
   newValue: value
 });
 
-export const saveOutgoingMessage = value => ({
-  type: MESSAGE_SAVE_OUTGOING,
+export const updateUserMessage = value => ({
+  type: MESSAGE_UPDATE_USERNAME,
   newValue: value
 });
 

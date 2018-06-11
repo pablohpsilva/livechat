@@ -5,7 +5,8 @@ import {
   updateClockFormat,
   updateCtrlEnter,
   resetConfig,
-  saveUsername
+  saveUsername,
+  updateUserMessage
 } from '../../store/actions';
 
 import Input from '../../components/Input'
@@ -14,9 +15,40 @@ import { appendClass } from '../../utils/util'
 import './Settings.scss'
 
 class Settings extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      oldUsername: ''
+    }
+
+    this.updateUsername = this.updateUsername.bind(this)
+  }
   setTheme() {
     const darkTheme = (this.props.interfaceColor === 'dark')
     document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light')
+  }
+
+  saveOldUsername (oldUsername) {
+    if (!this.state.oldUsername) {
+      this.setState((state) => Object.assign(state, { oldUsername }))
+    }
+  }
+
+  updateUsername ({ target: { value } }) {
+    this.saveOldUsername(this.props.username)
+    this.props.saveUsername(value)
+  }
+
+  updateUsernameMessages () {
+    if (this.state.oldUsername && this.props.username !== this.state.oldUsername) {
+      const { oldUsername } = this.state
+      const { username } = this.props
+      this.props.updateUserMessage({
+        oldUsername,
+        username
+      })
+    }
   }
 
   componentDidMount() {
@@ -25,6 +57,10 @@ class Settings extends React.Component {
 
   componentDidUpdate() {
     this.setTheme()
+  }
+
+  componentWillUnmount() {
+    this.updateUsernameMessages()
   }
 
   render () {
@@ -37,8 +73,7 @@ class Settings extends React.Component {
       updateInterface,
       updateClockFormat,
       updateCtrlEnter,
-      resetConfig,
-      saveUsername
+      resetConfig
     } = this.props
 
     const wrapperComputedClass = appendClass('settings-wrapper', this.props.className)
@@ -50,7 +85,7 @@ class Settings extends React.Component {
           className="settings-config">
           <Input
             label="username"
-            onChange={({ target: { value } }) => saveUsername(value)}
+            onChange={this.updateUsername}
             value={username} />
 
           <RadioOptions
@@ -67,8 +102,8 @@ class Settings extends React.Component {
             checked={clockDisplay}
             onChange={({ target: { value } }) => updateClockFormat(value)}
             options={[
-              { value: '12', text: '12 hours' },
-              { value: '24', text: '24 hours' },
+              { value: 'MMM DD hh:mm A', text: '12 hours' },
+              { value: 'MMM DD HH:mm', text: '24 hours' },
             ]}/>
 
           <RadioOptions
@@ -113,6 +148,7 @@ const mapDispatchToProps = dispatch => ({
   updateCtrlEnter: (value) => dispatch(updateCtrlEnter(value)),
   resetConfig: () => dispatch(resetConfig()),
   saveUsername: (value) => dispatch(saveUsername(value)),
+  updateUserMessage: (value) => dispatch(updateUserMessage(value)),
 })
 
 export default connect(

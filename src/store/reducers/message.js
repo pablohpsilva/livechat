@@ -1,6 +1,7 @@
 // import { propOr, identity } from 'ramda'
 import {
-  MESSAGE_SAVE
+  MESSAGE_SAVE,
+  MESSAGE_UPDATE_USERNAME
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -15,6 +16,22 @@ export const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         messages
+      }
+    case MESSAGE_UPDATE_USERNAME:
+      const {
+        oldUsername,
+        username
+      } = action.newValue
+      const updatedMessages = [...state.messages]
+        .map(message => {
+          if (message.author === oldUsername) {
+            message.author = username
+          }
+          return message
+        })
+      return {
+        ...state,
+        messages: updatedMessages
       }
     default:
       return state;
