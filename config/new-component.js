@@ -10,13 +10,15 @@ import { join } from 'path'
 
 function getVueComponent (name) {
   return `import React from 'react'
+import { appendClass } from '../../utils/util'
 
 class ${name} extends React.PureComponent {
   render () {
-    const compClass = ['${name}', this.props.className || ''].join(' ').trim()
+    const wrapperComputedClass = appendClass('${name}', this.props.className)
+
     return (
       <div
-        className={compClass}>
+        className={wrapperComputedClass}>
         { this.props.children }
       </div>
     )
