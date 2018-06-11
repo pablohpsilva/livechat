@@ -1,0 +1,25 @@
+.settings-wrapper {
+  .settings-config {
+    height: calc(100vh - 95px);
+  }
+
+  .settings-footer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .settings-button-restore {
+    width: 100%;
+    cursor: pointer;
+    max-width: 400px;
+    background: transparent;
+    border-radius: 3px;
+    border: 1px solid var(--primary-color-lighter);
+    color: var(--primary-color-lighter);
+    font-size: var(--size-regular);
+    padding: 8px;
+    outline: none;
+  }
+}
