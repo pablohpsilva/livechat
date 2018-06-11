@@ -11,10 +11,11 @@
     flex-direction: column;
     width: auto;
     max-width: 90%;
-    min-width: 300px;
+    min-width: 250px;
     padding: 8px;
     text-align: left;
     border-radius: 3px;
+    margin-bottom: 8px;
 
     .message-author,
     .message-timestamp {
