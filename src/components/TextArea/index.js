@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { omit, evolve } from 'ramda'
+import { omit } from 'ramda'
 import { appendClass } from '../../utils/util'
 import './TextArea.scss'
 
