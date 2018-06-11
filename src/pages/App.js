@@ -1,33 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import Chat from '../pages/Chat'
+import Settings from '../pages/Settings'
+import Toolbar from '../components/Toolbar'
+
 import './App.scss';
-import Input from '../components/Input'
-import TextArea from '../components/TextArea'
-import Message from '../components/Message'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+      <div
+        className="app-wrapper">
+        <Router>
+          <div
+            className="app-content">
+            <Toolbar />
 
-        <Input
-          label="vaca" />
-        <TextArea
-          placeholder="vaca" />
+            <Route
+              exact
+              path="/"
+              component={Chat} />
 
-        <Message
-          right
-          author="You"
-          message="akljsdkl aksjd kalsj dadj aksdlajs djaskd akjd laj sdla sdlj asjd asdjasjd aksjdklas dka skd alskjd aklsjd "
-          timestamp={new Date().toDateString()}/>
+            <Route
+              exact
+              path="/chat"
+              component={Chat} />
 
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+            <Route
+              exact
+              path="/settings"
+              component={Settings} />
+          </div>
+        </Router>
       </div>
     );
   }
