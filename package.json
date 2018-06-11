@@ -105,6 +105,8 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^0.28.11",
     "node-sass": "^4.9.0",
