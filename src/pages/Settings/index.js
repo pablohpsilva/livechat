@@ -140,7 +140,7 @@ class Settings extends React.Component {
           <button
             onClick={resetConfig}
             className="settings-button-restore">
-            Restore to defaults
+            { i18n.t('settings.restore', { lng }) }
           </button>
         </div>
       </div>
