@@ -4,7 +4,7 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-  username: 'Guest-World-1'
+  user: 'Guest-World-1'
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ export const userReducer = (state = initialState, action) => {
     case USER_SAVE_USERNAME:
       return {
         ...state,
-        username: action.newValue
+        user: action.value
       }
     default:
       return state;

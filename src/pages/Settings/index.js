@@ -5,7 +5,7 @@ import {
   updateClockFormat,
   updateCtrlEnter,
   resetConfig,
-  saveUsername,
+  saveUser,
   updateUserMessage
 } from '../../store/actions';
 
@@ -19,34 +19,34 @@ class Settings extends React.Component {
     super(props)
 
     this.state = {
-      oldUsername: ''
+      oldUser: ''
     }
 
-    this.updateUsername = this.updateUsername.bind(this)
+    this.updateUser = this.updateUser.bind(this)
   }
   setTheme() {
     const darkTheme = (this.props.interfaceColor === 'dark')
     document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light')
   }
 
-  saveOldUsername (oldUsername) {
-    if (!this.state.oldUsername) {
-      this.setState((state) => Object.assign(state, { oldUsername }))
+  saveOldUser (oldUser) {
+    if (!this.state.oldUser) {
+      this.setState((state) => Object.assign(state, { oldUser }))
     }
   }
 
-  updateUsername ({ target: { value } }) {
-    this.saveOldUsername(this.props.username)
-    this.props.saveUsername(value)
+  updateUser ({ target: { value } }) {
+    this.saveOldUser(this.props.User)
+    this.props.saveUser(value)
   }
 
-  updateUsernameMessages () {
-    if (this.state.oldUsername && this.props.username !== this.state.oldUsername) {
-      const { oldUsername } = this.state
-      const { username } = this.props
+  updateUserMessages () {
+    if (this.state.oldUser && this.props.User !== this.state.oldUser) {
+      const { oldUser } = this.state
+      const { User } = this.props
       this.props.updateUserMessage({
-        oldUsername,
-        username
+        oldUser,
+        User
       })
     }
   }
@@ -60,13 +60,13 @@ class Settings extends React.Component {
   }
 
   componentWillUnmount() {
-    this.updateUsernameMessages()
+    this.updateUserMessages()
   }
 
   render () {
 
     const {
-      username,
+      User,
       interfaceColor,
       clockDisplay,
       ctrlEnter,
@@ -84,9 +84,9 @@ class Settings extends React.Component {
         <div
           className="settings-config">
           <Input
-            label="username"
-            onChange={this.updateUsername}
-            value={username} />
+            label="User"
+            onChange={this.updateUser}
+            value={User} />
 
           <RadioOptions
             label="Interface color"
@@ -139,7 +139,7 @@ const mapStateToProps = store => ({
   interfaceColor: store.settingsState.interfaceColor,
   clockDisplay: store.settingsState.clockDisplay,
   ctrlEnter: store.settingsState.ctrlEnter,
-  username: store.userState.username,
+  User: store.userState.User,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -147,7 +147,7 @@ const mapDispatchToProps = dispatch => ({
   updateClockFormat: (value) => dispatch(updateClockFormat(value)),
   updateCtrlEnter: (value) => dispatch(updateCtrlEnter(value)),
   resetConfig: () => dispatch(resetConfig()),
-  saveUsername: (value) => dispatch(saveUsername(value)),
+  saveUser: (value) => dispatch(saveUser(value)),
   updateUserMessage: (value) => dispatch(updateUserMessage(value)),
 })
 

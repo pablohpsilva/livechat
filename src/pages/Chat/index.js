@@ -15,13 +15,18 @@ class Chat extends React.Component {
     this.saveOutgoingMessage = this.saveOutgoingMessage.bind(this)
   }
 
+  sendSocketIOMessage (message) {
+    this.props.socketio.emit('message', message)
+  }
+
   saveOutgoingMessage (value) {
     const message = {
-      author: this.props.author,
+      user: this.props.user,
       message: value,
       timestamp: new Date()
     }
     this.props.saveMessage(message)
+    this.sendSocketIOMessage(message)
   }
 
   setTheme () {
@@ -35,8 +40,9 @@ class Chat extends React.Component {
 
   render () {
     const {
-      author,
+      user,
       clockDisplay,
+      ctrlEnter,
       messages
     } = this.props
     const wrapperComputedClass = appendClass('chat-wrapper', this.props.className)
@@ -46,10 +52,11 @@ class Chat extends React.Component {
         className={wrapperComputedClass}>
         <ChatList
           data={messages}
-          author={author}
+          user={user}
           clockDisplay={clockDisplay}/>
 
         <TextArea
+          submitOnEnter={ctrlEnter !== 'on'}
           onEnter={this.saveOutgoingMessage}
           placeholder="Type something here"/>
       </div>
@@ -60,7 +67,9 @@ class Chat extends React.Component {
 const mapStateToProps = store => ({
   interfaceColor: store.settingsState.interfaceColor,
   clockDisplay: store.settingsState.clockDisplay,
-  author: store.userState.username,
+  ctrlEnter: store.settingsState.ctrlEnter,
+  user: store.userState.user,
+  socketio: store.socketioState.socketio,
   messages: store.messagesState.messages
 })
 

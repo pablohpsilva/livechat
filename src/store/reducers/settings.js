@@ -24,17 +24,17 @@ export const settingsReducer = (state = initialState, action) => {
     case SETTING_UPDATE_INTERFACE_VALUE:
       return {
         ...state,
-        interfaceColor: action.newValue
+        interfaceColor: action.value
       }
     case SETTING_UPDATE_CLOCK_VALUE:
       return {
         ...state,
-        clockDisplay: action.newValue
+        clockDisplay: action.value
       }
     case SETTING_UPDATE_CTRL_ENTER_VALUE:
       return {
         ...state,
-        ctrlEnter: action.newValue
+        ctrlEnter: action.value
       }
     case SETTING_RESET:
       return {

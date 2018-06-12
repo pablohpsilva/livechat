@@ -17,7 +17,7 @@ class ChatList extends React.Component {
 
   render () {
     const {
-      author,
+      user,
       data,
       clockDisplay
     } = this.props
@@ -35,8 +35,8 @@ class ChatList extends React.Component {
           renderItem={({ index }) =>
             <Message
               key={`message-${index}`}
-              right={data[index].author === author}
-              author={data[index].author}
+              right={data[index].user === user}
+              author={data[index].user}
               message={data[index].message}
               timestamp={data[index].timestamp}
               clockDisplay={clockDisplay} />
@@ -52,7 +52,7 @@ class ChatList extends React.Component {
 
 ChatList.propTypes = {
   data: PropTypes.array,
-  author: PropTypes.string,
+  user: PropTypes.string,
   clockDisplay: PropTypes.string,
 }
 
