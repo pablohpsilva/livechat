@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { omit } from 'ramda'
+import { assoc, omit } from 'ramda'
 import { appendClass } from '../../utils/util'
 import './TextArea.scss'
 
@@ -18,11 +18,11 @@ class TextArea extends React.Component {
   }
 
   cleanText() {
-    this.setState(state => Object.assign(state, { text: '' }))
+    this.setState(assoc('text', ''))
   }
 
   onChangeText({ target: { value } }) {
-    this.setState(state => Object.assign(state, { text: value }))
+    this.setState(assoc('text', value))
   }
 
   componentDidMount() {

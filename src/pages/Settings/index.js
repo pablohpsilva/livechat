@@ -1,4 +1,5 @@
 import React from 'react'
+import { assoc } from 'ramda'
 import { connect } from 'react-redux'
 
 import {
@@ -42,7 +43,7 @@ class Settings extends React.Component {
 
   saveOldUser (oldUser) {
     if (!this.state.oldUser) {
-      this.setState((state) => Object.assign(state, { oldUser }))
+      this.setState(assoc('oldUser', oldUser))
     }
   }
 
