@@ -1,10 +1,9 @@
 # Livechat
 This small application is a chat connected to an SocketIO. Below there's a gif of it working.
 
-<div
-  style="display:flex;justify-content:center;">
+<p align="center">
   <img src="./prototype/livechat.gif">
-</div>
+</p>
 
 ## Technologies and tools used
 * React v16;
