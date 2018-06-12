@@ -15,8 +15,6 @@ class RadioOptions extends React.Component {
     } = this.props
     const wrapperComputedClass = appendClass('radioOptions-wrapper', className)
 
-    console.log(options)
-
     return (
       <div
         className={wrapperComputedClass}>
