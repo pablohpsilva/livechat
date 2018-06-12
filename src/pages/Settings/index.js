@@ -5,7 +5,7 @@ import {
   updateClockFormat,
   updateCtrlEnter,
   resetConfig,
-  saveUser,
+  saveUsername,
   updateUserMessage
 } from '../../store/actions';
 
@@ -36,12 +36,12 @@ class Settings extends React.Component {
   }
 
   updateUser ({ target: { value } }) {
-    this.saveOldUser(this.props.User)
-    this.props.saveUser(value)
+    this.saveOldUser(this.props.user)
+    this.props.saveUsername(value)
   }
 
   updateUserMessages () {
-    if (this.state.oldUser && this.props.User !== this.state.oldUser) {
+    if (this.state.oldUser && this.props.user !== this.state.oldUser) {
       const { oldUser } = this.state
       const { User } = this.props
       this.props.updateUserMessage({
@@ -66,7 +66,7 @@ class Settings extends React.Component {
   render () {
 
     const {
-      User,
+      user,
       interfaceColor,
       clockDisplay,
       ctrlEnter,
@@ -86,7 +86,7 @@ class Settings extends React.Component {
           <Input
             label="User"
             onChange={this.updateUser}
-            value={User} />
+            value={user} />
 
           <RadioOptions
             label="Interface color"
@@ -139,7 +139,7 @@ const mapStateToProps = store => ({
   interfaceColor: store.settingsState.interfaceColor,
   clockDisplay: store.settingsState.clockDisplay,
   ctrlEnter: store.settingsState.ctrlEnter,
-  User: store.userState.User,
+  user: store.userState.user,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -147,7 +147,7 @@ const mapDispatchToProps = dispatch => ({
   updateClockFormat: (value) => dispatch(updateClockFormat(value)),
   updateCtrlEnter: (value) => dispatch(updateCtrlEnter(value)),
   resetConfig: () => dispatch(resetConfig()),
-  saveUser: (value) => dispatch(saveUser(value)),
+  saveUsername: (value) => dispatch(saveUsername(value)),
   updateUserMessage: (value) => dispatch(updateUserMessage(value)),
 })
 

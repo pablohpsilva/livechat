@@ -8,13 +8,15 @@ import Toolbar from '../components/Toolbar'
 
 import {
   saveMessage,
-  saveSocketio
+  saveSocketio,
+  updateUnreadMessage
 } from '../store/actions'
 
 import './App.scss';
 import env from '../env.json'
 
 class App extends Component {
+
   async createSocketIO() {
     return this.props.saveSocketio(window.io.connect(`${env.socketio_host}:${env.socketio_port}`))
   }
@@ -29,8 +31,11 @@ class App extends Component {
         ...msg,
         timestamp: new Date()
       }
-      console.log(message)
       this.props.saveMessage(message)
+
+      if (window.location.pathname === '/settings') {
+        this.props.updateUnreadMessage()
+      }
     })
   }
 
@@ -50,13 +55,16 @@ class App extends Component {
   }
 
   render () {
+    const { unreadMessages } = this.props
+
     return (
       <div
         className="app-wrapper">
         <Router>
           <div
             className="app-content">
-            <Toolbar />
+            <Toolbar
+              unreadMessages={unreadMessages}/>
 
             <Route
               exact
@@ -80,11 +88,13 @@ class App extends Component {
 }
 
 const mapStateToProps = store => ({
-  socketio: store.socketioState.socketio
+  socketio: store.socketioState.socketio,
+  unreadMessages: store.messagesState.unreadMessages
 })
 
 const mapDispatchToProps = dispatch => ({
   saveMessage: (value) => dispatch(saveMessage(value)),
+  updateUnreadMessage: (value) => dispatch(updateUnreadMessage(value)),
   saveSocketio: (value) => dispatch(saveSocketio(value))
 })
 

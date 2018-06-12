@@ -3,6 +3,8 @@ import {
   SETTING_UPDATE_CLOCK_VALUE,
   SETTING_UPDATE_CTRL_ENTER_VALUE,
   SETTING_RESET,
+  MESSAGE_UPDATE_UNREAD,
+  MESSAGE_CLEAN_UNREAD,
   MESSAGE_SAVE,
   MESSAGE_UPDATE_USERNAME,
   USER_SAVE_USERNAME,
@@ -30,6 +32,16 @@ export const resetConfig = () => ({
 
 export const saveMessage = value => ({
   type: MESSAGE_SAVE,
+  value
+});
+
+export const updateUnreadMessage = value => ({
+  type: MESSAGE_UPDATE_UNREAD,
+  value
+});
+
+export const clearUnreadMessage = value => ({
+  type: MESSAGE_CLEAN_UNREAD,
   value
 });
 

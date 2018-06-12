@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  saveMessage
+  saveMessage,
+  clearUnreadMessage
 } from '../../store/actions';
 import { appendClass } from '../../utils/util'
 
@@ -36,6 +37,7 @@ class Chat extends React.Component {
 
   componentDidMount () {
     this.setTheme()
+    this.props.clearUnreadMessage()
   }
 
   render () {
@@ -74,7 +76,8 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  saveMessage: (value) => dispatch(saveMessage(value))
+  saveMessage: (value) => dispatch(saveMessage(value)),
+  clearUnreadMessage: (value) => dispatch(clearUnreadMessage(value))
 })
 
 export default connect(

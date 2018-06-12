@@ -15,6 +15,8 @@ class RadioOptions extends React.Component {
     } = this.props
     const wrapperComputedClass = appendClass('radioOptions-wrapper', className)
 
+    console.log(options)
+
     return (
       <div
         className={wrapperComputedClass}>
@@ -28,24 +30,25 @@ class RadioOptions extends React.Component {
         <div
           className="radioOptions-items">
           {
-            options && options.length &&
-            options.map((el, index) => (
-              <div
-                key={`input-radio-${index}`}
-                className="radioOptions-input-radio">
-                <input
-                  name={name}
-                  value={el.value}
-                  checked={el.value === checked}
-                  onChange={(ev) => onChange(ev)}
-                  type="radio" />
-                <label
-                  htmlFor={el.value}
-                  className="radioOptions-label-radio">
-                  { el.text }
-                </label>
-              </div>
-            ))
+            (options && options.length)
+            ? options.map((el, index) => (
+                <div
+                  key={`input-radio-${index}`}
+                  className="radioOptions-input-radio">
+                  <input
+                    name={name}
+                    value={el.value}
+                    checked={el.value === checked}
+                    onChange={(ev) => onChange(ev)}
+                    type="radio" />
+                  <label
+                    htmlFor={el.value}
+                    className="radioOptions-label-radio">
+                    { el.text }
+                  </label>
+                </div>
+              ))
+            : null
           }
         </div>
       </div>
@@ -60,6 +63,7 @@ RadioOptions.propTypes = {
   // ]),
   // placeholder: PropTypes.string,
   label: PropTypes.string,
+  checked: PropTypes.string,
   // style: PropTypes.object,
   className: PropTypes.string,
   // type: PropTypes.string,

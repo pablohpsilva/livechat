@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { appendClass } from '../../utils/util'
 
@@ -23,9 +24,12 @@ class Toolbar extends React.Component {
             className="icon-chat"></span>
 
           {
-            unreadMessages &&
-            <span
-              className="indicator indicator-chat">1</span>
+            unreadMessages
+            ? <span
+                className="indicator indicator-chat">
+                { unreadMessages }
+              </span>
+            : null
           }
         </NavLink>
 
@@ -39,6 +43,10 @@ class Toolbar extends React.Component {
       </div>
     )
   }
+}
+
+Toolbar.propTypes = {
+  unreadMessages: PropTypes.number
 }
 
 export default Toolbar
