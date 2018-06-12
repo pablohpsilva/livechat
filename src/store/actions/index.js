@@ -2,6 +2,7 @@ import {
   SETTING_UPDATE_INTERFACE_VALUE,
   SETTING_UPDATE_CLOCK_VALUE,
   SETTING_UPDATE_CTRL_ENTER_VALUE,
+  SETTING_UPDATE_LANGUAGE_VALUE,
   SETTING_RESET,
   MESSAGE_UPDATE_UNREAD,
   MESSAGE_CLEAN_UNREAD,
@@ -23,6 +24,11 @@ export const updateClockFormat = value => ({
 
 export const updateCtrlEnter = value => ({
   type: SETTING_UPDATE_CTRL_ENTER_VALUE,
+  value
+});
+
+export const updateLanguage = value => ({
+  type: SETTING_UPDATE_LANGUAGE_VALUE,
   value
 });
 
