@@ -26,7 +26,7 @@ export default {
         es: 'Español',
         ptBr: 'Portugués',
       },
-      restore: 'Restaurar a los valores predeterminados',
+      restore: 'Restaurar los valores',
     },
   },
 }
