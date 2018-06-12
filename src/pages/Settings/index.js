@@ -1,16 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
 import {
   updateInterface,
   updateClockFormat,
   updateCtrlEnter,
+  updateLanguage,
   resetConfig,
   saveUsername,
   updateUserMessage
 } from '../../store/actions';
+import i18n from '../../i18n'
 
 import Input from '../../components/Input'
 import RadioOptions from '../../components/RadioOptions'
+import Select from '../../components/Select'
 import { appendClass } from '../../utils/util'
 import './Settings.scss'
 
@@ -18,8 +22,15 @@ class Settings extends React.Component {
   constructor(props) {
     super(props)
 
+    const { language: lng } = this.props
+
     this.state = {
-      oldUser: ''
+      oldUser: '',
+      languages: [
+        { value: 'en', text: i18n.t('settings.languages.en', { lng }) },
+        { value: 'es', text: i18n.t('settings.languages.es', { lng }) },
+        { value: 'ptBr', text: i18n.t('settings.languages.ptBr', { lng }) },
+      ]
     }
 
     this.updateUser = this.updateUser.bind(this)
@@ -70,9 +81,11 @@ class Settings extends React.Component {
       interfaceColor,
       clockDisplay,
       ctrlEnter,
+      language: lng,
       updateInterface,
       updateClockFormat,
       updateCtrlEnter,
+      updateLanguage,
       resetConfig
     } = this.props
 
@@ -84,42 +97,42 @@ class Settings extends React.Component {
         <div
           className="settings-config">
           <Input
-            label="User"
+            label={ i18n.t('settings.username', { lng }) }
             onChange={this.updateUser}
             value={user} />
 
           <RadioOptions
-            label="Interface color"
+            label={ i18n.t('settings.interfaceColor.label', { lng }) }
             checked={interfaceColor}
             onChange={({ target: { value } }) => updateInterface(value)}
             options={[
-              { value: 'light', text: 'Light' },
-              { value: 'dark', text: 'Dark' },
+              { value: 'light', text: i18n.t('settings.interfaceColor.light', { lng }) },
+              { value: 'dark', text: i18n.t('settings.interfaceColor.dark', { lng }) },
             ]}/>
 
           <RadioOptions
-            label="Clock display"
+            label={ i18n.t('settings.clockDisplay.label', { lng }) }
             checked={clockDisplay}
             onChange={({ target: { value } }) => updateClockFormat(value)}
             options={[
-              { value: 'MMM DD hh:mm A', text: '12 hours' },
-              { value: 'MMM DD HH:mm', text: '24 hours' },
+              { value: 'MMM DD hh:mm A', text: i18n.t('settings.clockDisplay.twelve', { lng }) },
+              { value: 'MMM DD HH:mm', text: i18n.t('settings.clockDisplay.twenty', { lng }) },
             ]}/>
 
           <RadioOptions
-            label="Ctrl+Enter to send Messages"
+            label={ i18n.t('settings.ctrlEnter.label', { lng }) }
             checked={ctrlEnter}
             onChange={({ target: { value } }) => updateCtrlEnter(value)}
             options={[
-              { value: 'on', text: 'On' },
-              { value: 'off', text: 'Off' },
+              { value: 'on', text: i18n.t('settings.ctrlEnter.on', { lng }) },
+              { value: 'off', text: i18n.t('settings.ctrlEnter.off', { lng }) },
             ]}/>
 
-          {/* <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-          </select> */}
+          <Select
+            selected={lng}
+            onChange={(value) => updateLanguage(value)}
+            label={ i18n.t('settings.languages.label', { lng }) }
+            options={this.state.languages}/>
         </div>
 
         <div
@@ -139,6 +152,7 @@ const mapStateToProps = store => ({
   interfaceColor: store.settingsState.interfaceColor,
   clockDisplay: store.settingsState.clockDisplay,
   ctrlEnter: store.settingsState.ctrlEnter,
+  language: store.settingsState.language,
   user: store.userState.user,
 })
 
@@ -146,6 +160,7 @@ const mapDispatchToProps = dispatch => ({
   updateInterface: (value) => dispatch(updateInterface(value)),
   updateClockFormat: (value) => dispatch(updateClockFormat(value)),
   updateCtrlEnter: (value) => dispatch(updateCtrlEnter(value)),
+  updateLanguage: (value) => dispatch(updateLanguage(value)),
   resetConfig: () => dispatch(resetConfig()),
   saveUsername: (value) => dispatch(saveUsername(value)),
   updateUserMessage: (value) => dispatch(updateUserMessage(value)),
