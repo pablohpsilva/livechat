@@ -5,6 +5,7 @@ import {
   clearUnreadMessage
 } from '../../store/actions';
 import { appendClass } from '../../utils/util'
+import i18n from '../../i18n'
 
 import ChatList from '../../components/ChatList'
 import TextArea from '../../components/TextArea'
@@ -45,6 +46,7 @@ class Chat extends React.Component {
       user,
       clockDisplay,
       ctrlEnter,
+      language: lng,
       messages
     } = this.props
     const wrapperComputedClass = appendClass('chat-wrapper', this.props.className)
@@ -60,7 +62,7 @@ class Chat extends React.Component {
         <TextArea
           submitOnEnter={ctrlEnter !== 'on'}
           onEnter={this.saveOutgoingMessage}
-          placeholder="Type something here"/>
+          placeholder={i18n.t('chat.textArea', { lng }) }/>
       </div>
     )
   }
@@ -70,6 +72,7 @@ const mapStateToProps = store => ({
   interfaceColor: store.settingsState.interfaceColor,
   clockDisplay: store.settingsState.clockDisplay,
   ctrlEnter: store.settingsState.ctrlEnter,
+  language: store.settingsState.language,
   user: store.userState.user,
   socketio: store.socketioState.socketio,
   messages: store.messagesState.messages
