@@ -16,3 +16,15 @@ This small application is a chat connected to an SocketIO. Below there's a gif o
 * Moment v2;
 * i18next v11;
 * SCSS;
+
+## Installing and Running
+```bash
+#clonning
+$ git clone https://github.com/pablohpsilva/livechat.git
+
+# installing
+$ cd livechat && yarn
+
+# running on development mode
+$ yarn dev
+```
